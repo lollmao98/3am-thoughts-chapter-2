@@ -113,7 +113,7 @@ function Invoke-EnterMash {
     Clear-KeyBuffer
 
     Write-Host "`nTime's up! Total Enters: $count" -ForegroundColor Green
-    Wait-Continue -DelaySeconds 1.5 -Prompt "Press Enter to continue"
+    $null = Read-Host "`nPress Enter to continue"
     return $count
 }
 
@@ -141,12 +141,12 @@ while ($Scene -ne "Exit") {
                 $State.Chill += 10
                 $State.Project += 20
                 Write-Dialogue -Speaker "Brain" -Text "Holly husser you knocked down 20 percent of our work" -Color Blue
-                Wait-Continue -DelaySeconds 1.5 -Prompt "Press Enter to continue"
+                $null = Read-Host "`nPress Enter to continue"
             }
             else {
                 $State.Project += 5
                 Write-Dialogue -Speaker "Brain" -Text "pshht rookie husser even a child is better (5 percent done)" -Color Blue
-                Wait-Continue -DelaySeconds 1.5 -Prompt "Press Enter to continue"
+                $null = Read-Host "`nPress Enter to continue"
             }
 
             if ($State.Project -gt 100) {
@@ -158,12 +158,19 @@ while ($Scene -ne "Exit") {
 
         "e" {
             Write-Dialogue -Speaker "Brain" -Text "Final Stats - Chill: $($State.Chill) | Project: $($State.Project)%" -Color Green
-            Wait-Continue -DelaySeconds 1.5 -Prompt "Press Enter to end program"
-            $Scene = "Exit"
+            $null = Read-Host "`nPress Enter to end program"
+            $Scene = "Type"
         }
 
         default {
-            $Scene = "Exit"
+            $Scene = "Type"
+        }
+
+        "Type"{
+
+
+
+            
         }
     }
 }
