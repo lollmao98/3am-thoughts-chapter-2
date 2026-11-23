@@ -157,8 +157,8 @@ while ($Scene -ne "Exit") {
         }
 
         "e" {
-            Write-Dialogue -Speaker "Brain" -Text "Final Stats - Chill: $($State.Chill) | Project: $($State.Project)%" -Color Green
-            $null = Read-Host "`nPress Enter to end program"
+            Write-Dialogue -Speaker "Brain" -Text "Stats - Chill: $($State.Chill) | Project: $($State.Project)%" -Color Green
+            $null = Read-Host "`nPress Enter to cotinue"
             $Scene = "Type"
         }
 
@@ -167,10 +167,33 @@ while ($Scene -ne "Exit") {
         }
 
         "Type"{
+            Write-Dialogue -Speaker "Brain" -Text "Will the One reviewing this project give Us an extra reward because he is so fun and all ladies and men love him"
+            $choice = Get-Choice -Options @(
+                " Ofcourse (ehmm)",
+                "Totally (achoo)"
+            )
+            if ($choice -eq 1) {
+            Write-Dialogue -Speaker "Brain" -Text "Hope so lol"
+            $null = Read-Host "`nPress Enter to continue"
 
+                $Scene = "pop"
+            } elseif ($choice -eq 2) {
+                Write-Dialogue -Speaker "Brain" -Text "Hope so lol"
+                $null = Read-Host "`nPress Enter to continue"
 
-
-            
+                $Scene = "pop"
+            }
         }
+        "pop"{
+
+
+
+
+        }
+
+
+
+
+        
     }
 }
