@@ -137,7 +137,7 @@ while ($Scene -ne "Exit") {
             Write-Dialogue -Speaker "Brain" -Text "$($State.PlayerName). You Hussed $hussCount times." -Color Green
             Wait-Continue -DelaySeconds 1.5 -Prompt "Press Enter to continue"
 
-            if ($hussCount -gt 30) {
+            if ($hussCount -gt 15) {
                 $State.Chill += 10
                 $State.Project += 20
                 Write-Dialogue -Speaker "Brain" -Text "Holly husser you knocked down 20 percent of our work" -Color Blue
@@ -157,43 +157,65 @@ while ($Scene -ne "Exit") {
         }
 
         "e" {
-            Write-Dialogue -Speaker "Brain" -Text "Stats - Chill: $($State.Chill) | Project: $($State.Project)%" -Color Green
-            $null = Read-Host "`nPress Enter to cotinue"
+            Write-Dialogue -Speaker "Brain" -Text "Stats Project: $($State.Project)%" -Color Green
+            $null = Read-Host "`nPress Enter to continue"
             $Scene = "Type"
         }
 
-        default {
-            $Scene = "Type"
-        }
-
-        "Type"{
-            Write-Dialogue -Speaker "Brain" -Text "Will the One reviewing this project give Us an extra reward because he is so fun and all ladies and men love him"
+        "Type" {
+            Write-Dialogue -Speaker "Brain" -Text "Will the One reviewing this project give Us an extra reward because he is so fun and all ladies and men love him" -Color Blue
             $choice = Get-Choice -Options @(
-                " Ofcourse (ehmm)",
+                "Ofcourse (ehmm)",
                 "Totally (achoo)"
             )
             if ($choice -eq 1) {
-            Write-Dialogue -Speaker "Brain" -Text "Hope so lol"
-            $null = Read-Host "`nPress Enter to continue"
-
-                $Scene = "pop"
-            } elseif ($choice -eq 2) {
-                Write-Dialogue -Speaker "Brain" -Text "Hope so lol"
+                Write-Dialogue -Speaker "Brain" -Text "Hope so lol(project done + 10%)" -Color Green
+                $State.Project += 10
                 $null = Read-Host "`nPress Enter to continue"
-
+                $Scene = "pop"
+            }
+            elseif ($choice -eq 2) {
+                Write-Dialogue -Speaker "Brain" -Text "Hope so lol(project done + 10%)" -Color Green
+                $State.Project += 10
+                $null = Read-Host "`nPress Enter to continue"
                 $Scene = "pop"
             }
         }
-        "pop"{
 
-
-
-
+        "pop" {
+            Write-Dialogue -Speaker "Ears" -Text "Chat is foot steps comming, BRACE FOR IMPACT!!!!!" -Color Blue
+            Write-Dialogue -Speaker "Brains" -Text "Just then $($State.PlayerName) learned true fear" -Color Green
+            $null = Read-Host "`nPress Enter to continue"
+            $Scene = "bro"
         }
 
+        "bro" {
+            Write-Dialogue -Speaker "Brother" -Text "(Door opens) Yoo aww you awake cool so I was thinking should we save for a switch I really want to play the new Zelda" -Color Blue
+            $choice = Get-Choice -Options @(
+                "No way I wanted that too",
+                "YOUR DISTRACTING ME LEAVEEEE!!"
+            )
+            if ($choice -eq 1) {
+                Write-Dialogue -Speaker "Brother" -Text "Is that the hackclub hackathon cool let me give you a hand (with the power of your bond you knocked another 40% of the project  damnn)" -Color Green
+                $State.Project += 
+                $null = Read-Host "`nPress Enter to continue"
+                $Scene = "hand"
+            }
+            elseif ($choice -eq 2) {
+                Write-Dialogue -Speaker "Mom" -Text "KIDS YOUR AWAKE(you were brutally scolded and forced to sleep ouch gg)" -Color Blue
+                $null = Read-Host "`nPress Enter to Exit"
+                $Scene = "Exit"
+            }
+        }
 
+        "hand" {
+            Write-Dialogue -Speaker "Brain" -Text " Project: $($State.Project)%" -Color Green
+            $null = Read-Host "`nPress Enter to end program"
+            $Scene = "Exit"
+        }
 
-
-        
+        default {
+            $Scene = "Exit"
+        }
     }
 }
